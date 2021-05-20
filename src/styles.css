@@ -1,0 +1,91 @@
+.App {
+  font-family: sans-serif;
+  text-align: center;
+}
+
+body {
+  margin: 0;
+  font-family: sans-serif;
+}
+
+label {
+  font-size: 14px;
+  padding-top: 0.25rem;
+}
+
+img {
+  width: 100%;
+  height: auto;
+}
+
+input {
+  padding: 0.25rem 0.25rem;
+  font-size: 0.75rem;
+}
+
+main {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  grid-template-areas: 'input code';
+  grid-gap: 2rem;
+}
+
+main > div {
+  display: flex;
+  grid-area: input;
+  flex-direction: column;
+  padding: 1rem;
+  height: calc(100vh - 2rem);
+  overflow-y: scroll;
+}
+
+main > div > div {
+  display: flex;
+  flex-direction: column;
+}
+
+pre {
+  margin: 0;
+  grid-area: code;
+  font-family: 'Dank Mono';
+  padding: 1rem 2rem !important;
+  height: calc(100vh - 2rem);
+  overflow: scroll;
+}
+
+.visual-preview {
+  grid-area: code;
+}
+
+code {
+  font-family: 'Menlo', 'Source Code Pro';
+  font-size: 0.875rem;
+}
+
+label,
+input,
+img {
+  margin-bottom: 0.5rem;
+}
+
+h4 {
+  padding-top: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+ul {
+  padding-bottom: 5rem;
+  margin-top: 0;
+  line-height: 1.45;
+}
+
+button {
+  display: block;
+  margin-top: 1rem;
+  padding: 1rem 1rem;
+  background: black;
+  color: white;
+  font-size: 0.75rem;
+  border: 1px solid black;
+  cursor: pointer;
+}
