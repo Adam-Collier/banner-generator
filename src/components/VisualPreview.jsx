@@ -1,11 +1,18 @@
-import React from "react"
+import React, {useState, useEffect} from "react"
 import styles from '../templates/default-styles';
 export default ({ templateLiteral }) => {
+  const [content, setContent] = useState(templateLiteral);
+
+  useEffect(() => {
+    const timeOutId = setTimeout(() => setContent(templateLiteral), 300);
+    return () => clearTimeout(timeOutId);
+  }, [templateLiteral])
+
   let defaultStyles = styles();
 
   let lazySizes = `<script src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/4.0.1/lazysizes.min.js" async=""></script>`;
 
-  let concatenatedTemplate = `${defaultStyles} ${templateLiteral} ${lazySizes}`;
+  let concatenatedTemplate = `${defaultStyles} ${content} ${lazySizes}`;
 
   let html = `
 <!DOCTYPE html>
