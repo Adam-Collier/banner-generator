@@ -1,14 +1,22 @@
 import React, { useState } from 'react';
+import prettier from 'https://unpkg.com/prettier@2.2.1/esm/standalone.mjs';
+import parserHTML from 'https://unpkg.com/prettier@2.2.1/esm/parser-html.mjs';
 
 export default ({ content }) => {
   const [copied, setCopied] = useState(false);
+
+    let formattedContent = prettier.format(content, {
+      parser: 'html',
+      plugins: [parserHTML],
+    });
+
 
   const delay = (duration) =>
     new Promise((resolve) => setTimeout(resolve, duration));
 
   let copyToClipboard = async () => {
     const el = document.createElement(`textarea`);
-    el.value = content;
+    el.value = formattedContent;
     el.setAttribute(`readonly`, ``);
     el.style.position = `absolute`;
     el.style.left = `-9999px`;
