@@ -39,7 +39,7 @@ export default ({ state, handleChange }) => {
       <label>SVG</label>
       <input type="text" name="svg" value={state.svg} onChange={handleChange} />
       <label>Url</label>
-      <input type="text" name="url" value={state.url} onChange={handleChange} />
+      <input type="text" name="url1" value={state.url1} onChange={handleChange} />
       <label>Url 2</label>
       <input
         type="text"

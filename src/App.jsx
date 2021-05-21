@@ -1,87 +1,125 @@
-import React from "react";
-import { useEffect, useState } from "react";
-import CodePreview from "./components/CodePreview";
-import SingleBanner from "./components/SingleBanner";
-import SplitBanner from "./components/SplitBanner";
-import SVGBanner from "./components/SVGBanner";
-import VisualPreview from "./components/VisualPreview";
+import React, { useEffect, useState } from 'react';
+import { nanoid } from 'nanoid';
+import axios from 'axios';
+import CodePreview from './components/CodePreview';
+import SingleBanner from './components/SingleBanner';
+import SplitBanner from './components/SplitBanner';
+import SVGBanner from './components/SVGBanner';
+import VisualPreview from './components/VisualPreview';
 
-import singleBanner from "./templates/single-banner";
-import splitBanner from "./templates/split-banner";
-import svgBanner from "./templates/svg-banner";
+import singleBanner from './templates/single-banner';
+import splitBanner from './templates/split-banner';
+import svgBanner from './templates/svg-banner';
 
-import "./styles.css";
+import './styles.css';
 
 export default function App() {
   const [state, setState] = useState({
-    bannerType: "single",
-    desktopImage: "",
-    mobileImage: "",
-    url: "",
-    url2: "",
-    terms: "",
-    title: "",
-    subtitle: "",
-    svg: "",
-    cta1: "",
-    cta2: ""
+    bannerType: 'single',
+    desktopImage: '',
+    mobileImage: '',
+    url1: '',
+    url2: '',
+    terms: '',
+    title: '',
+    subtitle: '',
+    svg: '',
+    cta1: '',
+    cta2: '',
   });
+
+  let endpoint = 'https://jsonstorage.net/api/items/';
+
+  let getSavedState = async (id) => {
+    try {
+      let response = await axios(
+        `${endpoint}${id}`
+      );
+      setState(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   let updateUrl = (name, value) => {
     const currentUrl = new URL(window.location.href);
     currentUrl.searchParams.set(name, value);
-    window.history.pushState({}, "", currentUrl);
+    window.history.pushState({}, '', currentUrl);
   };
 
+  // only run once on initial load
   useEffect(() => {
+    // get the current params from the url
     let searchParams = new URLSearchParams(window.location.search);
-    let defaultState = state;
+    console.log(searchParams);
 
-    Object.keys(defaultState).forEach((prop) => {
-      let param = searchParams.get(prop);
-      if (param) {
-        defaultState = {
-          ...defaultState,
-          [prop]: param
-        };
-      }
-    });
-
-    updateUrl("bannerType", defaultState.bannerType);
-
-    setState(defaultState);
-  }, []);
-
-  function handleChange(e) {
-    let { value, name } = e.target;
-    let valuesToTrim = ["desktopImage", "mobileImage", "url1", "url2"];
-
-    if (valuesToTrim.includes(name)) {
-      value = value.trim();
+    // if there is no postId assume its a new project and create a new id
+    if (!searchParams.get('postId')) {
+      updateUrl('postId', nanoid());
     }
 
-    updateUrl(name, value);
+    // if a getid exists grab the saved state and update the state
+    if (searchParams.get('getId')) {
+      getSavedState(searchParams.get('getId'), setState);
+    }
+  }, []);
 
-    setState({
-      ...state,
-      [name]: value
-    });
+  useEffect(() => {
+    const timeOutId = setTimeout(() => saveChange(), 500);
+    return () => clearTimeout(timeOutId);
+  }, [state])
+
+  let saveChange = async() => {
+    try {
+      // store the search params
+      let searchParams = new URLSearchParams(window.location.search);
+
+      // create the full url
+      let postUrl = `${endpoint}${searchParams.get('postId')}`;
+
+      // make the request, put if we have a getId, post if we dont
+      let response = await axios({
+        method: searchParams.get('getId') ? 'put' : 'post',
+        url: postUrl,
+        data: state,
+        headers: {
+          'content-type': 'application/json; charset=utf-8',
+        },
+      });
+
+      console.log(response);
+      // update the url with the getId returned in the response
+      // this shouldnt change when a put requests has been made
+      let jsonPath = response.data.uri;
+      let jsonId = jsonPath.substring(jsonPath.lastIndexOf('/') + 1);
+      updateUrl('getId', jsonId);
+    } catch (error) {
+      console.log(error);
+    }
   }
+
+  let handleChange = async (e) => {
+      let { value, name } = e.target;
+
+      setState({
+        ...state,
+        [name]: value,
+      });
+  };
 
   let TEMPLATE = {
     single: singleBanner(state),
     split: splitBanner(state),
-    svg: svgBanner(state)
+    svg: svgBanner(state),
   };
 
   let INPUTCOMPONENT = {
     single: SingleBanner,
     split: SplitBanner,
-    svg: SVGBanner
+    svg: SVGBanner,
   };
 
   let handleSelect = (e) => {
-    updateUrl("bannerType", e.target.value);
     setState({ ...state, bannerType: e.target.value });
   };
 
