@@ -6,6 +6,9 @@ export default (state) => {
 
   return /*HTML*/ `<div class="row fullwidth row-promo">
     <style>
+        .row img.lazyload:not([src]) {
+          visibility: hidden;
+        }
         .row-placeholder {
             position: relative;
             overflow: hidden;
@@ -34,8 +37,8 @@ export default (state) => {
             }
         }
     </style>
-    <a href="${state.url}">
-        <div class="row-placeholder"></div>
+    <a href="${state.url1}">
+        <div class="row-placeholder">
         <picture>
             ${imageTypes
               .map(
@@ -71,8 +74,9 @@ export default (state) => {
             `
               )
               .join('')}
-            <img class="lazyload" data-expand="-50" data-src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" alt="backup">
+            <img class="lazyload" data-src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" alt="backup">
         </picture>
+        </div>
         
         <div class="banner_content center">
           ${state.svg && state.svg}
