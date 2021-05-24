@@ -2,7 +2,8 @@ export default () => /*CSS*/ `
 .row img.lazyload:not([src]) {
     visibility: hidden;
 }
-.row-placeholder {
+
+.img-placeholder {
     position: relative;
     overflow: hidden;
     height: 0;
@@ -25,7 +26,7 @@ export default () => /*CSS*/ `
 }
 
 @media(max-width: 767px){
-    .row-placeholder {
+    .img-placeholder {
         padding-top: 100%;
     }
 }

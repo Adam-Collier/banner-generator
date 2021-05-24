@@ -1,12 +1,9 @@
 import createPictureElement from '../utils/createPictureElement';
-import placeholderStyles from '../utils/placeholderStyles';
 
 export default (state) => {
   return /*HTML*/ `
 <div class="row fullwidth row-hero-banner-single">
   <style>
-    ${placeholderStyles()}
-
     .row-hero-banner-single a {
       position: absolute;
       top: 0;

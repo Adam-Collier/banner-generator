@@ -1,12 +1,9 @@
 import createPictureElement from '../utils/createPictureElement';
-import placeholderStyles from '../utils/placeholderStyles';
 
 export default (state) => {
   return /*HTML*/ `
 <div class="row fullwidth row-split-banner">
   <style>
-    ${placeholderStyles()}
-
     @media (min-width: 768px) {
       .row-split-banner {
         position: relative;

@@ -1,15 +1,25 @@
 import {MOBILE_SIZES, DESKTOP_SIZES, IMAGE_TYPES} from "../constants"
 
 export default (state) => {
+    let addTransformation = (size, type) => {
+        let quality = 70
+
+        if (type === 'jpeg') {
+        return `w=${size}&qlt=${quality}&fmt.jpeg.interlaced=true&upscale=false`
+        } else if (type === 'webp') {
+        return `w=${size}&qlt=${quality}`
+        }
+    }
+
     return /*HTML*/ `
-    <div class="row-placeholder">
+    <div class="img-placeholder">
         <picture>
             ${IMAGE_TYPES.map(
             (type) => `
                 <source
                 type="image/${type}"
                 data-srcset="${MOBILE_SIZES.map(
-                (size) => `${state.mobileImage}.${type}?w=${size}&qlt=70 ${size}w`
+                (size) => `${state.mobileImage}.${type}?${addTransformation(size, type)} ${size}w`
                 ).join(',')}"
                 sizes="100vw"
                 media="(max-width: 767px)"
@@ -23,7 +33,7 @@ export default (state) => {
                 type="image/${type}"
                 data-srcset="${DESKTOP_SIZES.map(
                 (size) =>
-                    `${state.desktopImage}.${type}?w=${size}&qlt=70 ${size}w`
+                    `${state.desktopImage}.${type}?${addTransformation(size, type)} ${size}w`
                 ).join(',')}"
                 sizes="100vw"
                 />

@@ -1,12 +1,8 @@
 import createPictureElement from "../utils/createPictureElement"
-import placeholderStyles from "../utils/placeholderStyles"
 
 export default (state) => {
 
   return /*HTML*/ `<div class="row fullwidth row-promo">
-    <style>
-      ${placeholderStyles()}
-    </style>
     <a href="${state.url1}">
         ${createPictureElement(state)}
         <div class="banner_content center">
