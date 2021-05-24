@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from "react"
 import styles from '../templates/default-styles';
+import bannerStyles from "../utils/placeholderStyles"
 export default ({ templateLiteral }) => {
   const [content, setContent] = useState(templateLiteral);
 
@@ -25,6 +26,7 @@ export default ({ templateLiteral }) => {
     />
     <link rel="stylesheet" type="text/css" href="https://static.missguided.co.uk/skin/frontend/mgresponsive/default/css/styles-f7d9bc93dd.css">
     <title>Vite App</title>
+    <style>${bannerStyles()}</style>
   </head>
   <body>
     <div class="container">
