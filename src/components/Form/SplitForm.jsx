@@ -1,6 +1,6 @@
 import React from 'react';
-import CopyButton from '../components/CopyButton';
-import splitBanner from '../templates/split-banner';
+import CopyButton from '../CopyButton';
+import splitBanner from '../../templates/split-banner';
 
 export default ({ state, handleChange }) => {
   return (

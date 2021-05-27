@@ -1,8 +1,8 @@
 import React from 'react';
 
-import CopyButton from '../components/CopyButton';
+import CopyButton from '../CopyButton';
 
-import singleBanner from '../templates/single-banner';
+import singleBanner from '../../templates/single-banner';
 
 export default ({ state, handleChange }) => {
   return (

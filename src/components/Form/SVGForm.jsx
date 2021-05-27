@@ -1,6 +1,6 @@
 import React from 'react';
-import CopyButton from '../components/CopyButton';
-import svgBanner from '../templates/svg-banner';
+import CopyButton from '../CopyButton';
+import svgBanner from '../../templates/svg-banner';
 
 export default ({ state, handleChange }) => {
   return (

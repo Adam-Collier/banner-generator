@@ -1,10 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { nanoid } from 'nanoid';
 import axios from 'axios';
-import CodePreview from './components/CodePreview';
-import SingleBanner from './components/SingleBanner';
-import SplitBanner from './components/SplitBanner';
-import SVGBanner from './components/SVGBanner';
+import {SingleForm, SplitForm, SVGForm} from "./components/Form"
 import VisualPreview from './components/VisualPreview';
 
 import singleBanner from './templates/single-banner';
@@ -114,9 +111,9 @@ export default function App() {
   };
 
   let INPUTCOMPONENT = {
-    single: SingleBanner,
-    split: SplitBanner,
-    svg: SVGBanner,
+    single: SingleForm,
+    split: SplitForm,
+    svg: SVGForm,
   };
 
   let handleSelect = (e) => {
