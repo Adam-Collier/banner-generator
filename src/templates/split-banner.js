@@ -2,7 +2,7 @@ import createPictureElement from '../utils/createPictureElement';
 
 export default (state) => {
   return /*HTML*/ `
-<div class="row fullwidth row-split-banner">
+<div class="hero-banner row fullwidth row-split-banner">
   <style>
     @media (min-width: 768px) {
       .row-split-banner {

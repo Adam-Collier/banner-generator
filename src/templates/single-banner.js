@@ -2,7 +2,7 @@ import createPictureElement from '../utils/createPictureElement';
 
 export default (state) => {
   return /*HTML*/ `
-<div class="row fullwidth row-hero-banner-single">
+<div class="hero-banner row fullwidth row-hero-banner-single">
   <style>
     .row-hero-banner-single a {
       position: absolute;

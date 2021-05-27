@@ -2,7 +2,7 @@ import createPictureElement from "../utils/createPictureElement"
 
 export default (state) => {
 
-  return /*HTML*/ `<div class="row fullwidth row-promo">
+  return /*HTML*/ `<div class="hero-banner row fullwidth row-promo">
     <a href="${state.url1}">
         ${createPictureElement(state)}
         <div class="banner_content center">
